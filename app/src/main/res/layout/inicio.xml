@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo_uda" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/Michart"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_height="600dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="2dp">
+
+        <ImageButton
+            android:id="@+id/usuario"
+            android:layout_width="205dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="end"
+            android:src="@drawable/user" />
+
+        <ImageButton
+            android:id="@+id/libro"
+            android:layout_width="205dp"
+            android:layout_gravity="end"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/libro" />
+
+    </LinearLayout>
+</LinearLayout>

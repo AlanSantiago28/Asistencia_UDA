@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:srcCompat="@drawable/logoudahorizontal" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Crear Usuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="156dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="No. De Control"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="10dp"
+            android:id="@+id/control"
+            android:inputType="text"
+            android:layout_marginTop="32dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/AP"
+            android:layout_width="168dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="49dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="Apellido Paterno"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
+            <EditText
+                android:id="@+id/AM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="Apellido Materno"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="10dp"
+            android:id="@+id/Nombre"
+            android:inputType="text"
+            android:layout_marginTop="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+
+
+            <EditText
+                android:id="@+id/Sexo"
+                android:layout_width="168dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="49dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="Sexo"
+                android:inputType="none"
+                android:padding="10dp"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextText"
+               />
+
+            <EditText
+                android:id="@+id/Fecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="Fecha"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/Telefono"
+                android:layout_width="168dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="49dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="Telefono"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
+            <EditText
+                android:id="@+id/emergencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="No. de Emergencia"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/Carrera"
+                android:layout_width="168dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="49dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="Carrera"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
+            <EditText
+                android:id="@+id/Turno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="Turno"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:hint="Observaciones"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="10dp"
+            android:id="@+id/Observaciones"
+            android:inputType="text"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crear"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:padding="18dp"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_corner"
+            android:id="@+id/Crear"/>
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>
