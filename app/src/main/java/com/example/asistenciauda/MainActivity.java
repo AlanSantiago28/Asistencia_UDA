@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio);
 
+        //hola
+
         pieChart = findViewById(R.id.Michart);
         user = findViewById(R.id.usuario);
         libro = findViewById(R.id.libro);
@@ -61,12 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirRegistro();
-            }
-        });
+        user.setOnClickListener(v -> abrirRegistro());
 
         libro.setOnClickListener(new View.OnClickListener() {
             @Override
