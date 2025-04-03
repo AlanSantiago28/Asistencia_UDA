@@ -9,7 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,33 +34,34 @@ import java.util.Map;
 
 public class registro extends AppCompatActivity {
 
-    String[] items = {"Masculino", "Femenino"};
-
-    AutoCompleteTextView autoCompleteTextView;
-
-    ArrayAdapter<String> adapterItems;
-
-    private EditText NumeroControl, Apaterno, Amaterno, nombre, sexo, fecha, numero, Emergencia, carrera, turno, observaciones;
-
-    final Calendar myCalendar = Calendar.getInstance();
+    private ImageView imagen;
+    private TextView textView2;
+    private AutoCompleteTextView etCarrera ;
+    private TextInputLayout tilNumeroControl, tilApaterno, tilAmaterno, tilNombre, tilSexo, fecha, tilNumero, tilEmergencia, tilCarrera, tilTurno, tilObservaciones;
+    private TextInputEditText etNumeroControl, etApaterno, etAmaterno, etNombre, etSexo, Fe, etNumero, etEmergencia, etTurno, etObservaciones;
     private Button crear;
-    private String id="0";
+    private String id = "0";
+    final Calendar myCalendar = Calendar.getInstance();
 
     @SuppressLint("MissingInflatedId")
     @Override
-    //@SuppressLint()
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout);
-        id = getIntent().getExtras().getString("id");
+        setContentView(R.layout.x); // Asegúrate de que "layout" es el nombre correcto de tu XML
 
-        NumeroControl = findViewById(R.id.control);
-        Apaterno = findViewById(R.id.AP);
-        Amaterno = findViewById(R.id.AM);
-        nombre = findViewById(R.id.Nombre);
-        sexo = findViewById(R.id.Sexo);
+        // Inicializar las vistas usando los IDs del XML que proporcionaste
+        imagen = findViewById(R.id.imagen);
+        textView2 = findViewById(R.id.textView2);
+
+        // Inicializar los TextInputLayout
+        tilNumeroControl = findViewById(R.id.NC);
+        tilApaterno = findViewById(R.id.AP);
+        tilAmaterno = findViewById(R.id.AM);
+        tilNombre = findViewById(R.id.Nombre);
+        tilSexo = findViewById(R.id.Sexo);
+        Fe= findViewById(R.id.fe);
         fecha = findViewById(R.id.Fecha);
-        fecha.setOnClickListener(new View.OnClickListener() {
+        Fe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(registro.this, new DatePickerDialog.OnDateSetListener() {
@@ -69,30 +73,59 @@ public class registro extends AppCompatActivity {
 
                         String myFormat = "dd,MMM,yyyy";
                         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
-                        fecha.setText(dateFormat.format(myCalendar.getTime()));
+                        Fe.setText(dateFormat.format(myCalendar.getTime()));
                     }
                 }, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        numero = findViewById(R.id.Telefono);
-        Emergencia = findViewById(R.id.emergencia);
-        carrera = findViewById(R.id.Carrera);
-        turno = findViewById(R.id.Turno);
-        observaciones = findViewById(R.id.Observaciones);
+
+        tilNumero = findViewById(R.id.Tlfn);
+        tilEmergencia = findViewById(R.id.NEmergencia);
+        tilCarrera = findViewById(R.id.car);
+        tilTurno = findViewById(R.id.turno);
+        tilObservaciones = findViewById(R.id.Obs);
+        etCarrera= findViewById(R.id.mas);
+
+        String[] carreras = new String[]{
+          "Licenciado en Diseño Grafico",
+          "Licenciado en Derecho",
+          "Licenciado en Mercadotecnia",
+          "Licenciado en Comercio y Negocios Internacionales",
+          "Licenciado en Administracion de Empresas",
+          "Licenciado en Contador Publico",
+          "Licenciado en Psicologia Organizacional",
+          "Licenciado en Ciencias de la Comunicacion",
+          "Ingenieria Electronica e instrumentacion",
+                "Ingenieria Industrial",
+                "Ingenieria en Sistemas"
+        };
+        ArrayAdapter<String> adapter =new ArrayAdapter<>(
+          registro.this,
+          R.layout.mas,
+          carreras
+        );
+        etCarrera.setAdapter(adapter);
+
+
         crear = findViewById(R.id.Crear);
 
+        // Configurar el DatePickerDialog para el campo de fecha
 
+        // Configurar el listener para el botón Crear
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 guardarEstudiante();
-
             }
         });
 
-        if(Integer.parseInt(id)>0){
-            obtener_estudiantes("https://asmit.com.mx/uda_wbs/obtener_estudiante.php?ID="+id);
+        // Si se pasa un ID, obtener los datos del estudiante (esto ya estaba en tu código)
+        // Asegúrate de que la Activity que llama a esta le pase el ID correcto
+        if (getIntent().hasExtra("id")) {
+            id = getIntent().getStringExtra("id");
+            if (Integer.parseInt(id) > 0) {
+                obtener_estudiantes("https://asmit.com.mx/uda_wbs/obtener_estudiante.php?ID=" + id);
+            }
         }
     }
 
@@ -106,6 +139,7 @@ public class registro extends AppCompatActivity {
                 String message = jsonResponse.getString("message");
                 Log.d("Resultado", "Respuesta del servidor: " + message);
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                // Puedes agregar aquí lógica para limpiar los campos después de guardar
             } catch (JSONException e) {
                 Log.e("Resultado", "Error al procesar JSON: " + e.getMessage());
             }
@@ -117,18 +151,18 @@ public class registro extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("ID", id);
-                params.put("NoControl", NumeroControl.getText().toString());
-                params.put("ApellidoPaterno", Apaterno.getText().toString());
-                params.put("ApellidoMaterno", Amaterno.getText().toString());
-                params.put("Nombre", nombre.getText().toString());
-                params.put("Sexo", sexo.getText().toString());
-                params.put("FechaNacimiento", fecha.getText().toString());
-                params.put("Telefono", numero.getText().toString());
-                params.put("TelefonoEmergencia", Emergencia.getText().toString());
-                params.put("Carrera", carrera.getText().toString());
-                params.put("Turno", turno.getText().toString());
+                params.put("NoControl", etNumeroControl.getText().toString());
+                params.put("ApellidoPaterno", etApaterno.getText().toString());
+                params.put("ApellidoMaterno", etAmaterno.getText().toString());
+                params.put("Nombre", etNombre.getText().toString());
+                params.put("Sexo", etSexo.getText().toString());
+                params.put("FechaNacimiento", Fe.getText().toString());
+                params.put("Telefono", etNumero.getText().toString());
+                params.put("TelefonoEmergencia", etEmergencia.getText().toString());
+                params.put("Carrera", etCarrera.getText().toString());
+                params.put("Turno", etTurno.getText().toString());
                 params.put("Campus", "3");
-                params.put("Observaciones", observaciones.getText().toString());
+                params.put("Observaciones", etObservaciones.getText().toString());
                 return params;
             }
         };
@@ -137,49 +171,27 @@ public class registro extends AppCompatActivity {
     }
 
     private void obtener_estudiantes(String url) {
-        // Crear una cola de solicitudes
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        // Crear la solicitud GET
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 response -> {
                     try {
-                        // Convertir la respuesta en un objeto JSON
                         JSONObject jsonResponse = new JSONObject(response);
-
-                        // Verificar si la solicitud fue exitosa
                         if (jsonResponse.getBoolean("success")) {
-                            // Obtener el array "data"
                             JSONArray dataArray = jsonResponse.getJSONArray("data");
+                            if (dataArray.length() > 0) {
+                                JSONObject estudiante = dataArray.getJSONObject(0); // Suponiendo que solo se espera un estudiante
 
-                            // Recorrer el array de estudiantes
-                            for (int i = 0; i < dataArray.length(); i++) {
-                                JSONObject estudiante = dataArray.getJSONObject(i);
-
-                                // Extraer los datos
-                                String id = estudiante.getString("ID");
-                                String NumeroControl = estudiante.getString("NoControl");
-                                String apellidoPaterno = estudiante.getString("ApellidoPaterno");
-                                String apellidoMaterno = estudiante.getString("ApellidoMaterno");
-                                String nombre = estudiante.getString("Nombre");
-                                String fecha = estudiante.getString("FechaNacimiento");
-                                String numero = estudiante.getString("Telefono");
-                                String Emergencia = estudiante.getString("TelefonoEmergencia");
-                                String carrera = estudiante.getString("Carrera");
-                                String turno = estudiante.getString("Turno");
-                                String campus = estudiante.getString("Campus");
-                                String Observaciones = estudiante.getString("Observaciones");
-
-                                this.nombre.setText(nombre);
-                                Apaterno.setText(apellidoPaterno);
-                                Amaterno.setText(apellidoMaterno);
-                                this.NumeroControl.setText(NumeroControl);
-                                this.fecha.setText(fecha);
-                                this.Emergencia.setText(Emergencia);
-                                this.turno.setText(turno);
-                                this.carrera.setText(carrera);
-                                this.numero.setText(numero);
-                                observaciones.setText(Observaciones);
+                                etNumeroControl.setText(estudiante.getString("NoControl"));
+                                etApaterno.setText(estudiante.getString("ApellidoPaterno"));
+                                etAmaterno.setText(estudiante.getString("ApellidoMaterno"));
+                                etNombre.setText(estudiante.getString("Nombre"));
+                                Fe.setText(estudiante.getString("FechaNacimiento"));
+                                etNumero.setText(estudiante.getString("Telefono"));
+                                etEmergencia.setText(estudiante.getString("TelefonoEmergencia"));
+                                etCarrera.setText(estudiante.getString("Carrera"));
+                                etTurno.setText(estudiante.getString("Turno"));
+                                etObservaciones.setText(estudiante.getString("Observaciones"));
                             }
                         } else {
                             Log.e("Resultado", "La respuesta indica un fallo.");
@@ -190,7 +202,6 @@ public class registro extends AppCompatActivity {
                 },
                 error -> Log.e("Resultado", "Error en la solicitud: " + (error.getMessage() != null ? error.getMessage() : "Desconocido")));
 
-        // Agregar la solicitud a la cola
         requestQueue.add(stringRequest);
     }
 }

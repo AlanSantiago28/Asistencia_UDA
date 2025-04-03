@@ -113,6 +113,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="1dp"
                 android:background="@drawable/rounded_corner"
+                app:boxCornerRadiusTopStart="10dp"
                 android:hint="Fecha"
                 android:inputType="text"
                 android:padding="10dp"
