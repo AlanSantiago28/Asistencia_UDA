@@ -7,11 +7,20 @@ import android.graphics.Color;
 import android.health.connect.datatypes.units.Length;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -31,6 +40,8 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
     private PieChart pieChart;
     private ImageButton user;
-    private  ImageButton  libro;
+    private ImageButton libro;
+    private ImageButton scaner;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -53,24 +65,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio);
 
-        //hola
+        //hola  //adios
 
         pieChart = findViewById(R.id.Michart);
         user = findViewById(R.id.usuario);
         libro = findViewById(R.id.libro);
+        scaner = findViewById(R.id.scaner);
 
+        scaner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirScanner();
+            }
+        });
         obtener_asistencia();
-
 
 
         user.setOnClickListener(v -> abrirRegistro());
 
         libro.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {abrirLibro();}
+            public void onClick(View v) {
+                abrirLibro();
+            }
         });
+
     }
-    private boolean isDarkModeActive(){
+
+    private boolean isDarkModeActive() {
         int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
     }
@@ -102,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                             int Entraron_Tarde = jsonObject.getInt("Entraron Tarde");
                             int No_Han_Llegado = jsonObject.getInt("No Han Llegado");
 
-                            llenarGrafica( Entraron_Temprano, Entraron_Tarde, No_Han_Llegado);
+                            llenarGrafica(Entraron_Temprano, Entraron_Tarde, No_Han_Llegado);
 
                             // Mostrar en log
                             Log.d("Resultado", "Entraron Temprano: " + Entraron_Temprano);
@@ -121,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void llenarGrafica( int temprano, int tarde, int noLlegado){
+    private void llenarGrafica(int temprano, int tarde, int noLlegado) {
         List<PieEntry> entries = new ArrayList<>();
         entries.add(new PieEntry(temprano, "Temprano"));
         entries.add(new PieEntry(tarde, "Tarde"));
@@ -130,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
         PieDataSet dataSet = new PieDataSet(entries, "Asistencia");
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
-       int textColor = isDarkModeActive() ? R.color.textColorDark : R.color.textColorLight;
-       dataSet.setValueTextColor(ContextCompat.getColor(this, textColor));
-        Legend legend =pieChart.getLegend();
+        int textColor = isDarkModeActive() ? R.color.textColorDark : R.color.textColorLight;
+        dataSet.setValueTextColor(ContextCompat.getColor(this, textColor));
+        Legend legend = pieChart.getLegend();
         legend.setTextColor(ContextCompat.getColor(this, textColor));
         pieChart.setCenterTextColor(ContextCompat.getColor(this, textColor));
 
@@ -140,26 +162,31 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setData(data);
 
 
-            pieChart.animateY(1400);
-            pieChart.getDescription().setEnabled(false);
-            pieChart.setCenterText("Asistencia");
-            pieChart.setDrawHoleEnabled(true);
-            pieChart.setHoleColor(Color.WHITE);
-            pieChart.setHoleRadius(58f);
-            pieChart.setTransparentCircleRadius(61f);
-            pieChart.invalidate();
+        pieChart.animateY(1400);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setCenterText("Asistencia");
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setHoleRadius(58f);
+        pieChart.setTransparentCircleRadius(61f);
+        pieChart.invalidate();
 
     }
 
 
-
-    private void abrirRegistro(){
+    private void abrirRegistro() {
         Intent open = new Intent(this, listausuarios.class);
         startActivity(open);
     }
 
-    private void abrirLibro(){
+    private void abrirLibro() {
         Intent open = new Intent(this, grafica.class);
         startActivity(open);
     }
+
+    private void abrirScanner() {
+        Intent open = new Intent(this, Scaner.class);
+        startActivity(open);
+    }
+
 }

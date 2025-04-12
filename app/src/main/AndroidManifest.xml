@@ -13,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AsistenciaUDA"
+
+        android:hardwareAccelerated="true"
         tools:targetApi="31">
 
         <activity
@@ -22,6 +24,13 @@
         <activity
             android:name=".listausuarios"
             android:exported="false" />
+
+        <activity
+            android:name=".Scaner"
+            android:exported="false">
+
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -30,6 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+
 
     </application>
 

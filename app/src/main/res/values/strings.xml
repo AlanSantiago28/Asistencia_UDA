@@ -2,4 +2,6 @@
     <string name="app_name">Asistencia UDA</string>
     <string name="select">Sexo</string>
     <string name="dash">-</string>
+    <string name="scan_button_text">Escanear</string>
+    <string name="resultado_text_description">Resultado del escaneo</string>
 </resources>
