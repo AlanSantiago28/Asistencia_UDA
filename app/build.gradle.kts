@@ -25,7 +25,6 @@ android {
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -50,6 +49,7 @@ dependencies {
 
     implementation("com.journeyapps:zxing-android-embedded:4.1.0")
 
+    implementation("com.google.android.material:material:1.2.0-alpha3")
     implementation("com.android.volley:volley:1.2.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
