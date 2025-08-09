@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/imagen"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
             app:srcCompat="@drawable/logoudahorizontal" />
 
         <TextView
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:id="@+id/NC"
         android:hint="Numero de control"
@@ -46,10 +46,12 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
+
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/N2"
+            android:inputType="numberDecimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_goneMarginTop="16dp"
+        app:layout_goneMarginTop="10dp"
         android:id="@+id/l"
         app:layout_constraintTop_toBottomOf="@+id/NC">
 
@@ -68,7 +70,7 @@
             android:layout_weight="1"
             android:id="@+id/AP"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:hint="Apellido Paterno"
             app:boxBackgroundMode="outline"
@@ -80,6 +82,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Apaterno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -90,7 +93,7 @@
             android:layout_weight="1"
             android:id="@+id/AM"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:hint="Apellido Materno"
             app:boxBackgroundMode="outline"
@@ -103,6 +106,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:id="@+id/Amaterno"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:id="@+id/Nombre"
         android:hint="Nombre"
@@ -125,6 +129,7 @@
         app:layout_constraintTop_toBottomOf="@+id/l">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -133,7 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_goneMarginTop="16dp"
+        app:layout_goneMarginTop="4dp"
         android:id="@+id/l2"
         app:layout_constraintTop_toBottomOf="@+id/Nombre">
 
@@ -143,7 +148,7 @@
             android:layout_weight="1"
             android:id="@+id/Sexo"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:hint="Sexo"
             app:boxBackgroundMode="outline"
@@ -155,6 +160,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/sex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -165,9 +171,9 @@
             android:layout_weight="1"
             android:id="@+id/Fecha"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            android:hint="Fecha"
+            android:hint="Fecha de nacimiento"
             app:boxBackgroundMode="outline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -189,7 +195,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_goneMarginTop="16dp"
+        app:layout_goneMarginTop="4dp"
         android:id="@+id/l3"
         app:layout_constraintTop_toBottomOf="@+id/l2">
 
@@ -199,7 +205,7 @@
             android:layout_weight="1"
             android:id="@+id/Tlfn"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:hint="Numero"
             app:boxBackgroundMode="outline"
@@ -212,6 +218,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:inputType="phone"
+                android:id="@+id/num"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -221,7 +229,7 @@
             android:layout_weight="1"
             android:id="@+id/NEmergencia"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:hint="Numero de Energencia"
             app:boxBackgroundMode="outline"
@@ -234,6 +242,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:id="@+id/em"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -243,7 +252,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_goneMarginTop="16dp"
+        app:layout_goneMarginTop="4dp"
         android:id="@+id/l4"
         app:layout_constraintTop_toBottomOf="@+id/l3">
 
@@ -253,7 +262,7 @@
             android:layout_weight="1"
             android:id="@+id/car"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:hint="Carrera"
             app:boxBackgroundMode="outline"
@@ -276,7 +285,7 @@
             android:layout_weight="1"
             android:id="@+id/turno"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:hint="Turno"
             app:boxBackgroundMode="outline"
@@ -289,16 +298,19 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:id="@+id/tur"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:id="@+id/Obs"
         android:hint="Observaciones"
@@ -312,22 +324,21 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
+            android:id="@+id/ob"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/Crear"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/rounded_corner"
-        android:backgroundTint="@color/white"
-        android:padding="18dp"
-        android:text="Crear"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/Obs"
-        app:layout_constraintTop_toTopOf="@+id/Obs" />
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="157dp"
+        android:text="crear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Obs" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

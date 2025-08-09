@@ -2,6 +2,7 @@ package com.example.asistenciauda;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.health.connect.datatypes.units.Length;
@@ -15,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import android.Manifest;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,9 +27,11 @@ import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
@@ -50,6 +55,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,7 +85,19 @@ public class MainActivity extends AppCompatActivity {
                 abrirScanner();
             }
         });
-        obtener_asistencia();
+        Timer timer = new Timer();
+
+        TimerTask tarea = new TimerTask() {
+            @Override
+            public void run() {
+                obtener_asistencia();
+            }
+        };
+
+        // Ejecutar después de 2 segundos (2000 ms) y repetir cada 5 segundos (5000 ms)
+        timer.schedule(tarea, 30000);
+
+
 
 
         user.setOnClickListener(v -> abrirRegistro());
@@ -89,6 +108,17 @@ public class MainActivity extends AppCompatActivity {
                 abrirLibro();
             }
         });
+        if (!arePermissionsGranted()) {
+            requestPermissions();
+        }
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
 
     }
 
@@ -108,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         String Hora = "08:00";
 
         // Crear la solicitud GET
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://asmit.com.mx/uda_wbs/consultar_asistencias_por_hora.php?FechaHoraReferencia=" + fechaFormateada + " " + Hora,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://castalv.com/Clases/consultar_asistencias_por_hora.php?FechaHoraReferencia=" + fechaFormateada + " " + Hora,
                 response -> {
                     try {
                         // Convertir la respuesta en un objeto JSON
@@ -117,12 +147,12 @@ public class MainActivity extends AppCompatActivity {
                         // Verificar si la solicitud fue exitosa
                         if (jsonResponse.getBoolean("success")) {
                             // Obtener el objeto "resultados" en lugar de un array
-                            JSONObject jsonObject = jsonResponse.getJSONObject("resultados");
+                            JSONObject jsonObject = jsonResponse.getJSONObject("resumen");
 
                             // Extraer los datos
-                            int Entraron_Temprano = jsonObject.getInt("Entraron Temprano");
-                            int Entraron_Tarde = jsonObject.getInt("Entraron Tarde");
-                            int No_Han_Llegado = jsonObject.getInt("No Han Llegado");
+                            int Entraron_Temprano = jsonObject.getInt("Asistencia");
+                            int Entraron_Tarde = jsonObject.getInt("Tarde");
+                            int No_Han_Llegado = jsonObject.getInt("Faltantes");
 
                             llenarGrafica(Entraron_Temprano, Entraron_Tarde, No_Han_Llegado);
 
@@ -189,4 +219,25 @@ public class MainActivity extends AppCompatActivity {
         startActivity(open);
     }
 
+    private boolean arePermissionsGranted() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.INTERNET}, 100);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == 100) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    // Inform the user that permission was denied
+                }
+            }
+        }
+    }
 }

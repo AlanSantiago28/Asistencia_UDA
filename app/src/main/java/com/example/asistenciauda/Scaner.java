@@ -70,7 +70,7 @@ public class Scaner extends AppCompatActivity {
         }
     }
     private void registrarAsistenciaRemota(String noControl) {
-        String baseUrl = "https://asmit.com.mx/uda_wbs/registrar_asistencia.php";
+        String baseUrl = "https://castalv.com/Clases/registrar_asistencia.php";
         try {
             // Codificar el número de control para la URL
             String encodedNoControl = URLEncoder.encode(noControl, "UTF-8");

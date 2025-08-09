@@ -1,5 +1,6 @@
 package com.example.asistenciauda;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -22,17 +23,18 @@ import java.util.ArrayList;
 public class listausuarios extends AppCompatActivity {
 
     private Button crear;
-    private  ItemAdapter itemAdapter;
+    private static  ItemAdapter itemAdapter;
 
-    private final ArrayList<usuario> obtener_estudiantes = new ArrayList<>();
+    public static ArrayList<usuario> obtener_estudiantes = new ArrayList<>();
     private RecyclerView recyclerView;
-
+    private static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuarios);
 
+        activity = listausuarios.this;
         crear = findViewById(R.id.Crear);
         recyclerView = findViewById(R.id.R);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -49,14 +51,14 @@ public class listausuarios extends AppCompatActivity {
           startActivity(intent);
         });
 
-        obtener_estudiantes("https://asmit.com.mx/uda_wbs/obtener_estudiantes.php?Turno=0&Campus=0&Carrera=0");
+        obtener_estudiantes("https://castalv.com/Clases/obtener_estudiantes.php?Turno=0&Campus=0&Carrera=0");
 
     }
 
-    private void obtener_estudiantes(String url) {
+    public static void obtener_estudiantes(String url) {
         obtener_estudiantes.clear();
         // Crear una cola de solicitudes
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(activity);
 
         // Crear la solicitud GET
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -84,6 +86,7 @@ public class listausuarios extends AppCompatActivity {
                                 String numero = estudiante.getString("Telefono");
                                 String Emergencia = estudiante.getString("TelefonoEmergencia");
                                 String carrera = estudiante.getString("Carrera");
+                                String sexo = estudiante.getString("Sexo");
                                 String turno = estudiante.getString("Turno");
                                 String campus = estudiante.getString("Campus");
                                 String Observaciones = estudiante.getString("Observaciones");

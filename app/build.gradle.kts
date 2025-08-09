@@ -41,7 +41,10 @@ repositories {
 
 
 dependencies {
-    implementation("com.itextpdf:itextg:5.5.10") //p
+    implementation("com.itextpdf:itext7-core:7.1.15")
+    //p
+    implementation("commons-io:commons-io:2.8.0")  //
+
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")

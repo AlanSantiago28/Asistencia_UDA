@@ -14,56 +14,97 @@
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/Michart"
         android:layout_width="match_parent"
-        android:layout_height="417dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="16dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:gravity="bottom"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="2dp">
+        android:padding="8dp"
+        android:gravity="bottom">
 
-        <ImageButton
-            android:id="@+id/usuario"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="end"
-            android:scaleType="fitCenter"
-            android:src="@drawable/user" />
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <ImageButton
-            android:id="@+id/libro"
-            android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/usuario"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_circle"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alumno"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/libro"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bg_circle"
+                    android:padding="8dp"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/libro" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Expedientes"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="end"
-            android:scaleType="fitCenter"
-            android:src="@drawable/libro" />
+            android:orientation="vertical"
+            android:gravity="center">
 
+            <ImageButton
+                android:id="@+id/scaner"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_circle"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/scaner" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Escaner"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="vertical">
-
-        <ImageButton
-            android:id="@+id/scaner"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="end"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/scaner" />
 
 
-    </LinearLayout>
+
+
+
 
 
 </LinearLayout>
